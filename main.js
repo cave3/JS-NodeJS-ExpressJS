@@ -4,13 +4,10 @@ var path = require('path');
 
 var app = express();
 
-// simple middleware function
-/*
-var logger = function(req, res, next) {
-  console.log('logging...');
-}
-app.use(logger);
-*/
+// view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 
 // body-parser middleware
 app.use(bodyParser.json());
@@ -19,24 +16,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 // set static path
 app.use(express.static(path.join(__dirname, 'app')));
 
-var people = [
-  {
-    name: 'Sash',
-    age: 44
-  },
-  {
-    name: 'Misha',
-    age: 7
-  },
-  {
-    name: 'Lou',
-    age: 3
-  }
-]
 
 app.get('/', function(req, res) {
-  //res.send('Hello');
-  res.json(people);
+  res.render('index', {
+    title: 'Customers'
+  });
 });
 
 app.listen(3000, function() {
