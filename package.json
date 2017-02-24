@@ -1,0 +1,23 @@
+{
+  "name": "CustomerApp",
+  "version": "1.0.0",
+  "description": "Simple NodeJS and ExpressJS web-app",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cave3/JS-NodeJS-ExpressJS.git"
+  },
+  "author": "cave3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cave3/JS-NodeJS-ExpressJS/issues"
+  },
+  "homepage": "https://github.com/cave3/JS-NodeJS-ExpressJS#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1"
+  }
+}
