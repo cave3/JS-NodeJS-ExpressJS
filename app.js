@@ -91,9 +91,6 @@ app.delete('/users/delete/:id', function(req, res){
       console.log(err);
     }
     res.redirect('/');
-
-
-
   });
 });
 
