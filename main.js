@@ -2,7 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var expressValidator = require('express-validator');
+var mongojs = require('mongojs');
 
+var db = mongojs('customerapp', ['users'])
 var app = express();
 
 // view engine
@@ -41,33 +43,20 @@ app.use(expressValidator({
   }
 }));
 
-// USERS
-var users = [
-  {
-    id: 1,
-    first_name: 'John',
-    last_name: 'Doe',
-    email:  'jdoe@gmail.com'
-  },
-  {
-    id: 2,
-    first_name: 'Bob',
-    last_name: 'Smith',
-    email:  'bsmith@gmail.com'
-  },
-  {
-    id: 3,
-    first_name: 'Jill',
-    last_name: 'Jackson',
-    email:  'jjackson@gmail.com'
-  }
-];
-
 app.get('/', function(req, res) {
-  res.render('index', {
-    title: 'Customers',
-    users: users
-  });
+  // find everything
+  db.users.find(function (err, docs) {
+    // docs is an array of all the documents in mycollection
+    //console.log(docs);
+
+    res.render('index', {
+      title: 'Customers',
+      users: docs
+    });
+
+  })
+
+
 });
 
 app.post('/users/add', function(req, res){
@@ -90,6 +79,12 @@ app.post('/users/add', function(req, res){
       email: req.body.email
     }
     console.log('SUCCESS');
+    db.users.insert(newUser, function(err, result) {
+      if(err) {
+        console.log(err);
+      }
+      //result.redirect('/');
+    });
   }
 });
 
